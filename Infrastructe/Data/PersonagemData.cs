@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Domain.DTO;
 using Domain.Interface;
 using System.Net;
+using System.Linq;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Infrastructe.Data
@@ -37,7 +38,7 @@ namespace Infrastructe.Data
             using (SqlConnection conexao = new SqlConnection(_connectionString))
             {
                 var result = conexao.Query<PersonagemDTO>(query, new { id });
-                return result.IsNullOrEmpty ? result.ToList()[0] : null;
+                return result.Any() ? result.ToList()[0] : new PersonagemDTO();
             }
         }
 
