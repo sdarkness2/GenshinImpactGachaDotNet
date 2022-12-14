@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Domain.DTO;
 using Domain.Interface;
 using System.Net;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Infrastructe.Data
 {
@@ -23,6 +24,7 @@ namespace Infrastructe.Data
             _connectionString = _config.GetConnectionString("GenshinDb");
         }
 
+        #region LEITURA
         public PersonagemDTO RetornaPersonagemPorId(int id)
         {
             //protocolo de segurança
@@ -35,7 +37,7 @@ namespace Infrastructe.Data
             using (SqlConnection conexao = new SqlConnection(_connectionString))
             {
                 var result = conexao.Query<PersonagemDTO>(query, new { id });
-                return result.Count() > 0 ? result.ToList()[0] : null;
+                return result.IsNullOrEmpty ? result.ToList()[0] : null;
             }
         }
 
@@ -54,5 +56,8 @@ namespace Infrastructe.Data
                 return result;
             }
         }
+        #endregion
+        #region ESCRITA
+        #endregion
     }
 }
