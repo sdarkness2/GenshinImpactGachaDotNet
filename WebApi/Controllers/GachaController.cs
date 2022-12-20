@@ -1,4 +1,5 @@
-﻿using Domain.Interface;
+﻿using Domain.Entity;
+using Domain.Interface;
 using Infrastructe.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +9,7 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     public class GachaController : Controller
     {
-        public GachaController(IPersonagemData personagemData)
+        public GachaController()
         {
         }
 

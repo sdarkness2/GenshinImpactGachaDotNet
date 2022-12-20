@@ -1,4 +1,5 @@
 ﻿using Domain.DTO;
+using Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace Domain.Interface
 {
     public interface IPersonagemData
     {
-        PersonagemDTO RetornaPersonagemPorId(int id);
-        IEnumerable<PersonagemDTO> RetornaTodosOsPersonagens()
+        IEnumerable<PersonagemDTO> RetornaPersonagemPorId(PersonagemIdEntity personagem);
+        IEnumerable<PersonagemDTO> RetornaTodosOsPersonagens();
+        bool AdicionarPersonagem(PersonagemEntity personagem);
     }
 }

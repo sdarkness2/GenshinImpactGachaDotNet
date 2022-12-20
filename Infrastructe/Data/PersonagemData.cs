@@ -11,54 +11,47 @@ using Domain.Interface;
 using System.Net;
 using System.Linq;
 using Microsoft.IdentityModel.Tokens;
+using Infrastructe.Data.Base;
+using Domain.Entity;
 
 namespace Infrastructe.Data
 {
-    public class PersonagemData : IPersonagemData
+    public class PersonagemData : BaseData, IPersonagemData
     {
-        private IConfiguration _config;
-        private readonly string _connectionString;
+        private static string _connectionString = "GenshinDb";
 
-        public PersonagemData(IConfiguration config)
+        public PersonagemData(IConfiguration config):base(_connectionString, config)
         {
-            _config = config;
-            _connectionString = _config.GetConnectionString("GenshinDb");
         }
 
         #region LEITURA
-        public PersonagemDTO RetornaPersonagemPorId(int id)
+        public IEnumerable<PersonagemDTO> RetornaPersonagemPorId(PersonagemIdEntity personagem)
         {
-            //protocolo de segurança
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
+            var query = "SELECT * FROM TB_PERSONAGEM WHERE PERSONAGEMID = @PERSONAGEMID";
 
-            //query a ser executada
-            var query = "SELECT * FROM TB_PERSONAGEM WHERE PERSONAGEMID = @ID";
-
-            //execução do dapper
-            using (SqlConnection conexao = new SqlConnection(_connectionString))
-            {
-                var result = conexao.Query<PersonagemDTO>(query, new { id });
-                return result.Any() ? result.ToList()[0] : new PersonagemDTO();
-            }
+            return base.Read<PersonagemDTO>(personagem, query);
         }
 
         public IEnumerable<PersonagemDTO> RetornaTodosOsPersonagens()
         {
-            //protocolo de segurança
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
+            var query = "SELECT * FROM TB_PERSONAGEM";
 
-            //query a ser executada
-            var query = "SELECT * FROM TB_PERSONAGEM WHERE PERSONAGEMID";
-
-            //execução do dapper
-            using (SqlConnection conexao = new SqlConnection(_connectionString))
-            {
-                var result = conexao.Query<PersonagemDTO>(query);
-                return result;
-            }
+            return base.Read<PersonagemDTO>(null, query);
         }
         #endregion
+
         #region ESCRITA
+
+        public bool AdicionarPersonagem(PersonagemEntity personagem)
+        {
+            var query = @"INSERT INTO TB_PERSONAGEM (NOME, ESTRELA, ELEMENTO)
+                        VALUES (@NOME, @ESTRELA, @ELEMENTO)";
+
+            var result = base.Write(personagem, query);
+
+            return result > 0 ? true : false;
+        }
+
         #endregion
     }
 }
