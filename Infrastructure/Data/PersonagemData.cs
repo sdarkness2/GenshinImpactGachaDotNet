@@ -14,7 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using Infrastructe.Data.Base;
 using Domain.Entity;
 
-namespace Infrastructe.Data
+namespace Infrastructure.Data
 {
     public class PersonagemData : BaseData, IPersonagemData
     {

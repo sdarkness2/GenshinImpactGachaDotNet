@@ -1,6 +1,6 @@
 ﻿using Domain.DTO;
 using Domain.Entity;
-using Domain.Enumerable;
+using Domain.Enum;
 using Domain.Interface;
 using Moq;
 using System;

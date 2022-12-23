@@ -1,6 +1,6 @@
 using Domain.Business;
 using Domain.Interface;
-using Infrastructe.Data;
+using Infrastructure.Data;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);

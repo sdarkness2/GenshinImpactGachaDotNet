@@ -1,4 +1,4 @@
-﻿using Domain.Enumerable;
+﻿using Domain.Enum;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
