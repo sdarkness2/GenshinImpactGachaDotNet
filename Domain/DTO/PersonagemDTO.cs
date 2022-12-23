@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Domain.DTO
 {
+    [ExcludeFromCodeCoverage]
     public class PersonagemDTO
     {
-        [ExcludeFromCodeCoverage]
         public int PersonagemId { get; set; }
         public string Nome { get; set; }
         public int Estrela { get; set; }
