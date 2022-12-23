@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
-using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using Domain.DTO;
-using Domain.Interface;
-using System.Net;
-using System.Linq;
-using Microsoft.IdentityModel.Tokens;
-using Infrastructe.Data.Base;
+﻿using Domain.DTO;
 using Domain.Entity;
+using Domain.Interface;
+using Infrastructe.Data.Base;
+using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Data
 {
@@ -29,14 +19,14 @@ namespace Infrastructure.Data
         {
             var query = "SELECT * FROM TB_PERSONAGEM WHERE PERSONAGEMID = @PERSONAGEMID";
 
-            return base.Read<PersonagemDTO>(query, personagem);
+            return base.Leitura<PersonagemDTO>(query, personagem);
         }
 
         public IEnumerable<PersonagemDTO> RetornaTodosOsPersonagens()
         {
             var query = "SELECT * FROM TB_PERSONAGEM";
 
-            return base.Read<PersonagemDTO>(query, null);
+            return base.Leitura<PersonagemDTO>(query, null);
         }
         #endregion
 
@@ -47,7 +37,7 @@ namespace Infrastructure.Data
             var query = @"INSERT INTO TB_PERSONAGEM (NOME, ESTRELA, ELEMENTO)
                         VALUES (@NOME, @ESTRELA, @ELEMENTO)";
 
-            var result = base.Write(query, personagem);
+            var result = base.Escrita(query, personagem);
 
             return result > 0;
         }

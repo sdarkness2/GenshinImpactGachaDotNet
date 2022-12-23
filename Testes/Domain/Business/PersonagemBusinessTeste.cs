@@ -3,11 +3,6 @@ using Domain.Entity;
 using Domain.Enum;
 using Domain.Interface;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Testes.Domain.Business
 {

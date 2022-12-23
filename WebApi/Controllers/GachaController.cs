@@ -1,7 +1,4 @@
-﻿using Domain.Entity;
-using Domain.Interface;
-using Infrastructe.Data;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {

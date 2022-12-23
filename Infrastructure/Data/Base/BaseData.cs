@@ -1,13 +1,7 @@
 ﻿using Dapper;
-using Domain.DTO;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructe.Data.Base
 {
@@ -21,7 +15,7 @@ namespace Infrastructe.Data.Base
             _connectionString = _config.GetConnectionString(connectioString);
         }
 
-        public IEnumerable<T> Read<T>(string query, object? param)
+        public IEnumerable<T> Leitura<T>(string query, object? param)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
 
@@ -45,7 +39,7 @@ namespace Infrastructe.Data.Base
             }
         }
 
-        public int Write(string query, object param)
+        public int Escrita(string query, object param)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
 
