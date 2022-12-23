@@ -63,10 +63,12 @@ namespace Testes.Domain.Business
         }
 
         [Trait("Domain", "Business")]
-        [Fact(DisplayName = nameof(AdicionarPersonagemNomeMenosQueQuatroCaracteres))]
-        public void AdicionarPersonagemNomeMenosQueQuatroCaracteres()
+        [Theory(DisplayName = nameof(AdicionarPersonagemNomeMenosQueQuatroCaracteresOuNulo))]
+        [InlineData("Dil")]
+        [InlineData("")]
+        public void AdicionarPersonagemNomeMenosQueQuatroCaracteresOuNulo(string nome)
         {
-            var personagem = new PersonagemEntity("Dil", 5, ElementosEnum.PYRO);
+            var personagem = new PersonagemEntity(nome, 5, ElementosEnum.PYRO);
 
             var result = _business.AdicionarPersonagem(personagem);
 
@@ -74,37 +76,16 @@ namespace Testes.Domain.Business
         }
 
         [Trait("Domain", "Business")]
-        [Fact(DisplayName = nameof(AdicionarPersonagemNomeVazio))]
-        public void AdicionarPersonagemNomeVazio()
+        [Theory(DisplayName = nameof(AdicionarPersonagemEstrelaMenorQueQuatroEMaiorQueCinco))]
+        [InlineData(3)]
+        [InlineData(6)]
+        public void AdicionarPersonagemEstrelaMenorQueQuatroEMaiorQueCinco(int estrela)
         {
-            var personagem = new PersonagemEntity("", 5, ElementosEnum.PYRO);
-
-            var result = _business.AdicionarPersonagem(personagem);
-
-            Assert.Equal("O nome deve ter no minimo 4 caracteres e não deve ser nulo.", result);
-        }
-
-        [Trait("Domain", "Business")]
-        [Fact(DisplayName = nameof(AdicionarPersonagemEstrelaMaiorQueCinco))]
-        public void AdicionarPersonagemEstrelaMaiorQueCinco()
-        {
-            var personagem = new PersonagemEntity("Diluc", 6, ElementosEnum.PYRO);
+            var personagem = new PersonagemEntity("Diluc", estrela, ElementosEnum.PYRO);
 
             var result = _business.AdicionarPersonagem(personagem);
 
             Assert.Equal("As estrelas do personagem só vão de 4 a 5.", result);
         }
-
-        [Trait("Domain", "Business")]
-        [Fact(DisplayName = nameof(AdicionarPersonagemEstrelaMenorQueQuatro))]
-        public void AdicionarPersonagemEstrelaMenorQueQuatro()
-        {
-            var personagem = new PersonagemEntity("Diluc", 3, ElementosEnum.PYRO);
-
-            var result = _business.AdicionarPersonagem(personagem);
-
-            Assert.Equal("As estrelas do personagem só vão de 4 a 5.", result);
-        }
-
     }
 }
