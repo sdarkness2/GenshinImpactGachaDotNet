@@ -31,7 +31,7 @@ namespace Domain.Business
         {
             if(personagem.Nome.Length < 4 || string.IsNullOrEmpty(personagem.Nome))
             {
-                return "O nome deve ter no minimo 4 caracteres e não deve ser nulo.";
+                return "O nome deve ter no minimo 4 caracteres e não deve ser vazio.";
             }
             if(personagem.Estrela > 5 || personagem.Estrela < 4)
             {

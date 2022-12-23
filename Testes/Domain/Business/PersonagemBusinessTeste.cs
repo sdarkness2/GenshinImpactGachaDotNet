@@ -32,6 +32,7 @@ namespace Testes.Domain.Business
             Assert.Equal("Personagem adicionado com sucesso", result);
         }
 
+        [Trait("Domain", "Business")]
         [Fact(DisplayName = nameof(AdicionarPersonagemSemSucesso))]
         public void AdicionarPersonagemSemSucesso()
         {
@@ -63,16 +64,16 @@ namespace Testes.Domain.Business
         }
 
         [Trait("Domain", "Business")]
-        [Theory(DisplayName = nameof(AdicionarPersonagemNomeMenosQueQuatroCaracteresOuNulo))]
+        [Theory(DisplayName = nameof(AdicionarPersonagemNomeMenosQueQuatroCaracteresOuVazio))]
         [InlineData("Dil")]
         [InlineData("")]
-        public void AdicionarPersonagemNomeMenosQueQuatroCaracteresOuNulo(string nome)
+        public void AdicionarPersonagemNomeMenosQueQuatroCaracteresOuVazio(string nome)
         {
             var personagem = new PersonagemEntity(nome, 5, ElementosEnum.PYRO);
 
             var result = _business.AdicionarPersonagem(personagem);
 
-            Assert.Equal("O nome deve ter no minimo 4 caracteres e não deve ser nulo.", result);
+            Assert.Equal("O nome deve ter no minimo 4 caracteres e não deve ser vazio.", result);
         }
 
         [Trait("Domain", "Business")]
