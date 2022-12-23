@@ -11,7 +11,7 @@ namespace Domain.Business
 {
     public class PersonagemBusiness : IPersonagemBusiness
     {
-        private IPersonagemData _personagemData;
+        private readonly IPersonagemData _personagemData;
 
         public PersonagemBusiness(IPersonagemData personagemData)
         {
@@ -39,9 +39,9 @@ namespace Domain.Business
             {
                 return "O nome deve ter no minimo 4 caracteres e não deve ser nulo.";
             }
-            if(personagem.Estrela > 5 || personagem.Estrela < 3)
+            if(personagem.Estrela > 5 || personagem.Estrela < 4)
             {
-                return "As estrelas do personagem só vão de 3 a 5";
+                return "As estrelas do personagem só vão de 4 a 5.";
             }
             var validarNomePersonagem = VerificarSePersonagemJáExiste(personagem);
             if(!string.IsNullOrEmpty(validarNomePersonagem))

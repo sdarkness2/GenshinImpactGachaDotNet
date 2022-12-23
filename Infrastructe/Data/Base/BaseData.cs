@@ -13,7 +13,7 @@ namespace Infrastructe.Data.Base
 {
     public class BaseData
     {
-        private IConfiguration _config;
+        private readonly IConfiguration _config;
         private readonly string _connectionString;
         public BaseData(string connectioString, IConfiguration config) 
         {
@@ -21,7 +21,7 @@ namespace Infrastructe.Data.Base
             _connectionString = _config.GetConnectionString(connectioString);
         }
 
-        public IEnumerable<T> Read<T>(object param, string query)
+        public IEnumerable<T> Read<T>(string query, object? param)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
 
@@ -35,9 +35,9 @@ namespace Infrastructe.Data.Base
 
                 return result;
             }
-            catch(Exception ex) 
+            catch(Exception) 
             {
-                throw ex;
+                throw;
             }
             finally
             {
@@ -45,7 +45,7 @@ namespace Infrastructe.Data.Base
             }
         }
 
-        public int Write(object param, string query)
+        public int Write(string query, object param)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
 
@@ -59,9 +59,9 @@ namespace Infrastructe.Data.Base
 
                 return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {

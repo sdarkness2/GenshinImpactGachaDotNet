@@ -29,14 +29,14 @@ namespace Infrastructe.Data
         {
             var query = "SELECT * FROM TB_PERSONAGEM WHERE PERSONAGEMID = @PERSONAGEMID";
 
-            return base.Read<PersonagemDTO>(personagem, query);
+            return base.Read<PersonagemDTO>(query, personagem);
         }
 
         public IEnumerable<PersonagemDTO> RetornaTodosOsPersonagens()
         {
             var query = "SELECT * FROM TB_PERSONAGEM";
 
-            return base.Read<PersonagemDTO>(null, query);
+            return base.Read<PersonagemDTO>(query, null);
         }
         #endregion
 
@@ -47,9 +47,9 @@ namespace Infrastructe.Data
             var query = @"INSERT INTO TB_PERSONAGEM (NOME, ESTRELA, ELEMENTO)
                         VALUES (@NOME, @ESTRELA, @ELEMENTO)";
 
-            var result = base.Write(personagem, query);
+            var result = base.Write(query, personagem);
 
-            return result > 0 ? true : false;
+            return result > 0;
         }
 
         #endregion
